@@ -105,6 +105,29 @@ h3 {
   color: var(--ink-soft);
 }
 
+.menu-toggle {
+  display: none;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.55rem;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 1.2rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
 .site-nav a:hover,
 .site-nav a:focus-visible,
 .lang-button:hover,
@@ -476,10 +499,6 @@ h3 {
 }
 
 @media (max-width: 980px) {
-  .site-nav {
-    display: none;
-  }
-
   .hero-layout,
   .two-column,
   .service-grid,
@@ -506,22 +525,98 @@ h3 {
   }
 
   .header-inner {
-    align-items: flex-start;
-    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    gap: 0.8rem;
   }
 
   .header-tools {
-    width: 100%;
-    justify-content: space-between;
+    margin-left: auto;
+    width: auto;
+    gap: 0.6rem;
+  }
+
+  .site-nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    display: none;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0.35rem 0;
+    background: rgba(255, 255, 255, 0.99);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 12px 30px rgba(72, 38, 47, 0.08);
+  }
+
+  .site-header.is-open .site-nav {
+    display: grid;
+  }
+
+  .site-nav a {
+    padding: 0.95rem;
+    border-top: 1px solid #efe7cf;
+  }
+
+  .site-nav a:first-child {
+    border-top: 0;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .site-header.is-open .menu-toggle span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .site-header.is-open .menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-header.is-open .menu-toggle span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
   }
 
   .call-button {
-    flex: 1;
+    display: none;
   }
 
   .hero,
   .section {
-    padding: 2.6rem 0;
+    padding: 2.35rem 0;
+  }
+
+  .hero-layout {
+    gap: 1.35rem;
+  }
+
+  .hero-copy {
+    order: 2;
+  }
+
+  .hero-panel {
+    order: 1;
+  }
+
+  .hero-panel,
+  .visit-box,
+  .booking-preview {
+    padding: 1rem;
+  }
+
+  .hero-panel img {
+    aspect-ratio: 16 / 11;
+  }
+
+  h1 {
+    font-size: clamp(2.1rem, 11vw, 3rem);
+  }
+
+  .hero-text,
+  .body-copy {
+    font-size: 1.02rem;
   }
 
   .hero-actions,

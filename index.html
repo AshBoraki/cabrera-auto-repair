@@ -65,7 +65,7 @@
           <span class="brand-name">Cabrera Auto Repair</span>
           <span class="brand-tag" data-i18n="brandTag">English & Espanol</span>
         </a>
-        <nav class="site-nav" aria-label="Primary">
+        <nav class="site-nav" id="primary-nav" aria-label="Primary">
           <a href="#services" data-i18n="navServices">Services</a>
           <a href="#about" data-i18n="navAbout">About</a>
           <a href="#reviews" data-i18n="navReviews">Reviews</a>
@@ -78,6 +78,18 @@
             <button class="lang-button" data-lang="es" type="button">ES</button>
           </div>
           <a class="call-button" href="tel:+12244044798" data-i18n="callNow">Call Now</a>
+          <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="primary-nav"
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </div>
     </header>

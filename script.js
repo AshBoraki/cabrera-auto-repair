@@ -269,6 +269,9 @@ const form = document.querySelector("#booking-form");
 const preview = document.querySelector("#message-preview");
 const serviceSelect = document.querySelector("#service");
 const langButtons = document.querySelectorAll(".lang-button");
+const siteHeader = document.querySelector(".site-header");
+const menuToggle = document.querySelector("#menu-toggle");
+const navLinks = document.querySelectorAll(".site-nav a");
 const fields = ["name", "email", "phone", "vehicle", "service", "day", "details"].map((id) =>
   document.querySelector(`#${id}`)
 );
@@ -341,6 +344,15 @@ function applyTranslations() {
   });
 }
 
+function setMenuState(isOpen) {
+  if (!siteHeader || !menuToggle) {
+    return;
+  }
+
+  siteHeader.classList.toggle("is-open", isOpen);
+  menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+}
+
 fields.forEach((field) => {
   field.addEventListener("input", updatePreview);
   field.addEventListener("change", updatePreview);
@@ -351,6 +363,25 @@ langButtons.forEach((button) => {
     currentLang = button.dataset.lang;
     applyTranslations();
   });
+});
+
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = !siteHeader.classList.contains("is-open");
+    setMenuState(isOpen);
+  });
+}
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    setMenuState(false);
+  });
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 720) {
+    setMenuState(false);
+  }
 });
 
 applyTranslations();
