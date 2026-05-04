@@ -71,16 +71,18 @@ const translations = {
     review2Text: '"High quality and reliable place to fix your vehicle."',
     review3Text: '"Manuel is a very good and honest mechanic."',
     bookKicker: "Book Service",
-    bookTitle: "Send a simple request from your phone.",
+    bookTitle: "Send a simple request to the shop.",
     bookText:
-      "Fill out the form and the site will prepare a text message for the shop. If you prefer, call directly.",
+      "Fill out the form and send your request straight to the shop email. If you prefer, call directly.",
     labelName: "Name",
+    labelEmail: "Email (optional)",
     labelPhone: "Phone",
     labelVehicle: "Vehicle",
     labelService: "Service Needed",
     labelDay: "Preferred Day",
     labelDetails: "What is the issue?",
     placeholderName: "Your name",
+    placeholderEmail: "Your email address",
     placeholderPhone: "Best number to reach you",
     placeholderVehicle: "Year, make, and model",
     placeholderDay: "Today, tomorrow, or a date",
@@ -88,7 +90,7 @@ const translations = {
     submitText: "Send Booking Request",
     callShop: "Call Shop",
     previewLabel: "Request Preview",
-    previewText: "This creates a text message draft for Cabrera Auto Repair.",
+    previewText: "This is the request that will be sent to the shop email.",
     visitKicker: "Visit",
     visitTitle: "Easy to find on South Elmhurst Road.",
     visitText:
@@ -121,6 +123,7 @@ const translations = {
     previewLines: [
       "Hello Cabrera Auto Repair, I would like to request service.",
       "Name",
+      "Email",
       "Phone",
       "Vehicle",
       "Service",
@@ -200,16 +203,18 @@ const translations = {
     review2Text: '"Un lugar confiable y de alta calidad para reparar su vehiculo."',
     review3Text: '"Manuel es un mecanico muy bueno y honesto."',
     bookKicker: "Reservar Servicio",
-    bookTitle: "Envie una solicitud simple desde su telefono.",
+    bookTitle: "Envie una solicitud simple al taller.",
     bookText:
-      "Llene el formulario y el sitio preparara un mensaje de texto para el taller. Si prefiere, llame directamente.",
+      "Llene el formulario y envie su solicitud directamente al correo del taller. Si prefiere, llame directamente.",
     labelName: "Nombre",
+    labelEmail: "Correo electronico (opcional)",
     labelPhone: "Telefono",
     labelVehicle: "Vehiculo",
     labelService: "Servicio Necesario",
     labelDay: "Dia Preferido",
     labelDetails: "Cual es el problema?",
     placeholderName: "Su nombre",
+    placeholderEmail: "Su correo electronico",
     placeholderPhone: "Mejor numero para contactarle",
     placeholderVehicle: "Ano, marca y modelo",
     placeholderDay: "Hoy, manana o una fecha",
@@ -217,7 +222,7 @@ const translations = {
     submitText: "Enviar Solicitud",
     callShop: "Llamar al Taller",
     previewLabel: "Vista Previa",
-    previewText: "Esto crea un borrador de mensaje para Cabrera Auto Repair.",
+    previewText: "Esta es la solicitud que se enviara al correo del taller.",
     visitKicker: "Ubicacion",
     visitTitle: "Facil de encontrar en South Elmhurst Road.",
     visitText:
@@ -250,6 +255,7 @@ const translations = {
     previewLines: [
       "Hola Cabrera Auto Repair, quiero pedir servicio.",
       "Nombre",
+      "Correo electronico",
       "Telefono",
       "Vehiculo",
       "Servicio",
@@ -263,7 +269,7 @@ const form = document.querySelector("#booking-form");
 const preview = document.querySelector("#message-preview");
 const serviceSelect = document.querySelector("#service");
 const langButtons = document.querySelectorAll(".lang-button");
-const fields = ["name", "phone", "vehicle", "service", "day", "details"].map((id) =>
+const fields = ["name", "email", "phone", "vehicle", "service", "day", "details"].map((id) =>
   document.querySelector(`#${id}`)
 );
 
@@ -299,11 +305,12 @@ function buildMessage() {
   return [
     labels[0],
     `${labels[1]}: ${values.name}`,
-    `${labels[2]}: ${values.phone}`,
-    `${labels[3]}: ${values.vehicle}`,
-    `${labels[4]}: ${values.service}`,
-    `${labels[5]}: ${values.day}`,
-    `${labels[6]}: ${values.details}`
+    `${labels[2]}: ${values.email || "-"}`,
+    `${labels[3]}: ${values.phone}`,
+    `${labels[4]}: ${values.vehicle}`,
+    `${labels[5]}: ${values.service}`,
+    `${labels[6]}: ${values.day}`,
+    `${labels[7]}: ${values.details}`
   ].join("\n");
 }
 
@@ -344,12 +351,6 @@ langButtons.forEach((button) => {
     currentLang = button.dataset.lang;
     applyTranslations();
   });
-});
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const message = buildMessage();
-  window.location.href = `sms:+12244044798?&body=${encodeURIComponent(message)}`;
 });
 
 applyTranslations();

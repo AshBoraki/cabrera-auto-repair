@@ -256,13 +256,26 @@
               <h2 data-i18n="bookTitle">Send a simple request from your phone.</h2>
             </div>
             <p class="body-copy" data-i18n="bookText">
-              Fill out the form and the site will prepare a text message for the
-              shop. If you prefer, call directly.
+              Fill out the form and send your request straight to the shop
+              email. If you prefer, call directly.
             </p>
-            <form class="booking-form" id="booking-form">
+            <form
+              class="booking-form"
+              id="booking-form"
+              action="https://formsubmit.co/autorepaircabrera@gmail.com"
+              method="POST"
+            >
+              <input type="hidden" name="_subject" value="New Cabrera Auto Repair service request" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_next" value="https://cabrera-autorepair.com/thanks.html" />
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hp-field" />
               <label>
                 <span data-i18n="labelName">Name</span>
                 <input id="name" name="name" type="text" required data-i18n-placeholder="placeholderName" />
+              </label>
+              <label>
+                <span data-i18n="labelEmail">Email</span>
+                <input id="email" name="email" type="email" data-i18n-placeholder="placeholderEmail" />
               </label>
               <label>
                 <span data-i18n="labelPhone">Phone</span>
@@ -294,7 +307,7 @@
             <span class="info-label" data-i18n="previewLabel">Request Preview</span>
             <pre id="message-preview"></pre>
             <p data-i18n="previewText">
-              This creates a text message draft for Cabrera Auto Repair.
+              This is the request that will be sent to the shop email.
             </p>
           </aside>
         </div>
